@@ -1,0 +1,65 @@
+version: "3.9"
+
+services:
+
+    # image project
+    app:
+        build:
+            context: .
+            dockerfile: Dockerfile
+        image: gerenciador-de-produtos
+        container_name: gdp-app
+        restart: unless-stopped
+        tty: true
+        environment:
+            SERVICE_NAME: app
+            SERVICE_TAGS: dev
+        working_dir: /var/www
+        volumes:
+            - ./:/var/www
+            - ./php/local.ini:/usr/local/etc/php/conf.d/local.ini
+        networks:
+            - gdp-network
+
+    #Nginx Service
+    nginx:
+        image: nginx:alpine
+        container_name: gdp-nginx
+        restart: unless-stopped
+        tty: true
+        ports:
+            - "80:80"
+            - "443:443"
+        volumes:
+            - ./:/var/www
+            - ./nginx/conf.d/:/etc/nginx/conf.d/
+        networks:
+            - gdp-network
+
+    #MySQL Service
+    db:
+        image: mysql:5.7.22
+        container_name: gdp-mysql
+        restart: unless-stopped
+        tty: true
+        ports:
+            - "3307:3307"
+        environment:
+            MYSQL_DATABASE: ${DB_DATABASE}
+            MYSQL_ROOT_PASSWORD: ${DB_PASSWORD}
+            SERVICE_TAGS: dev
+            SERVICE_NAME: mysql
+        volumes:
+            - ./mysql/dbdata:/var/lib/mysql/
+            - ./mysql/my.cnf:/etc/my.cnf
+        networks:
+            - gdp-network
+
+#Docker Networks
+networks:
+    gdp-network:
+        driver: bridge
+#Volumes
+volumes:
+    dbdata:
+        driver: local
