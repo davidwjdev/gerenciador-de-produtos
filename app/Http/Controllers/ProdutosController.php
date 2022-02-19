@@ -2,6 +2,8 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Produto;
+
 use Illuminate\Http\Request;
 
 class ProdutosController extends Controller
@@ -13,7 +15,8 @@ class ProdutosController extends Controller
      */
     public function index()
     {
-        //
+        $produtos = Produto::all();
+        return view('produtos.index', compact('produtos'));
     }
 
     /**
@@ -23,7 +26,7 @@ class ProdutosController extends Controller
      */
     public function create()
     {
-        //
+        return view('produtos.form');
     }
 
     /**
@@ -34,7 +37,15 @@ class ProdutosController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $request->validate([
+            'name' => 'required',
+        ]);
+        $body = $request->all();
+        $produto = new Produto;
+        $produto = Produto::create($body);
+        $produto->save();
+
+        return redirect('/produtos');
     }
 
     /**
@@ -56,7 +67,8 @@ class ProdutosController extends Controller
      */
     public function edit($id)
     {
-        //
+        $produto = Produto::findOrFail($id);
+        return view('produtos.form', ['produto' => $produto]);
     }
 
     /**
@@ -68,7 +80,14 @@ class ProdutosController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $produto = Produto::findOrFail($id);
+        $request->validate([
+            'name' => 'required'
+        ]);
+        $input = $request->all();
+        $produto->fill($input)->save();
+
+        return redirect('/produtos');
     }
 
     /**
@@ -79,6 +98,8 @@ class ProdutosController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $produto = Produto::findOrFail($id);
+        $produto->delete();
+        return redirect('/produtos');
     }
 }

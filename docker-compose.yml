@@ -43,9 +43,11 @@ services:
         restart: unless-stopped
         tty: true
         ports:
-            - "3307:3307"
+            - "3306:3306"
         environment:
             MYSQL_DATABASE: ${DB_DATABASE}
+            MYSQL_USERNAME: ${DB_USERNAME}
+            MYSQL_PASSWORD: ${DB_PASSWORD}
             MYSQL_ROOT_PASSWORD: ${DB_PASSWORD}
             SERVICE_TAGS: dev
             SERVICE_NAME: mysql
