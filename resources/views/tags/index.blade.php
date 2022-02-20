@@ -1,16 +1,18 @@
 @extends('layout')
 
 @section('title')
-    Produtos
+    Tags
 @endsection
 
 @section('content')
     <div class="py-1">
-        <a href="/produtos/adicionar" class="btn btn-success"
-         data-bs-toggle="tooltip" data-bs-placement="top" title="Adicionar" >
-            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="#FFFFFF" class="bi bi-plus-lg" viewBox="0 0 16 16">
-                <path fill-rule="evenodd" d="M8 2a.5.5 0 0 1 .5.5v5h5a.5.5 0 0 1 0 1h-5v5a.5.5 0 0 1-1 0v-5h-5a.5.5 0 0 1 0-1h5v-5A.5.5 0 0 1 8 2Z"/>
-              </svg>
+        <a href="/tags/adicionar" class="btn btn-success" data-bs-toggle="tooltip" data-bs-placement="top"
+            title="Adicionar">
+            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="#FFFFFF" class="bi bi-plus-lg"
+                viewBox="0 0 16 16">
+                <path fill-rule="evenodd"
+                    d="M8 2a.5.5 0 0 1 .5.5v5h5a.5.5 0 0 1 0 1h-5v5a.5.5 0 0 1-1 0v-5h-5a.5.5 0 0 1 0-1h5v-5A.5.5 0 0 1 8 2Z" />
+            </svg>
         </a>
     </div>
     <div class="py-5">
@@ -19,24 +21,21 @@
             <thead>
                 <tr>
                     <th scope="col">#</th>
-                    <th scope="col">Produto</th>
-                    <th scope="col" colspan="2">Tags</th>
+                    <th scope="col" colspan="2">Tag</th>
                 </tr>
             </thead>
             <tbody>
-                @if (count($produtos) == 0)
+                @if (count($tags) == 0)
                     <tr>
-                        <td colspan="4">Não existem produtos cadastrados!</td>
+                        <td colspan="3">Não existem tags cadastrados!</td>
                     </tr>
                 @else
-                    @foreach ($produtos as $key => $value)
-                        <tr class="align-middle">
+                    @foreach ($tags as $key => $value)
+                        <tr>
                             <th scope="row" class="col-1">{{ $value->id }}</th>
-                            <td class="col-1">{{ $value->name }}</td>
-                            <td class="col-5">{{ $value->tags }}</td>
-
-                            <td class="col-1">
-                                <a href="/produtos/editar/id={{ $value->id }}" class="btn btn-warning"
+                            <td class="col-9">{{ $value->name }}</td>
+                            <td>
+                                <a href="/tags/editar/id={{ $value->id }}" class="btn btn-warning"
                                     data-bs-toggle="tooltip" data-bs-placement="top" title="Editar">
                                     <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="#FFFFFF"
                                         class="bi bi-pencil-fill" viewBox="0 0 16 16">
@@ -54,7 +53,7 @@
                                         </svg>
                                     </a>
                                 </span>
-                                @extends('produtos.modal')
+                                @extends('tags.modal')
                             </td>
                         </tr>
                     @endforeach

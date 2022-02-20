@@ -15,5 +15,5 @@ class Tag extends Model
         'updated_at'
     ];
 
-    protected $table = "tags";
+    protected $table = "tag";
 }

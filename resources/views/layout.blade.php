@@ -50,6 +50,19 @@
             @yield('content')
         </div>
     </div>
+
+    <script type="text/javascript">
+        $(document).ready(function() {
+            $('.modal').modal('show');
+        });
+    </script>
+
+    <script>
+        var tooltipTriggerList = [].slice.call(document.querySelectorAll('[data-bs-toggle="tooltip"]'))
+        var tooltipList = tooltipTriggerList.map(function(tooltipTriggerEl) {
+            return new bootstrap.Tooltip(tooltipTriggerEl)
+        })
+    </script>
 </body>
 
 </html>

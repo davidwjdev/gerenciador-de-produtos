@@ -4,24 +4,22 @@
         <div class="modal-dialog">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h5 class="modal-title">Deseja apagar o produto?</h5>
+                    <h5 class="modal-title">Deseja apagar o tag?</h5>
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
                 <div class="modal-body">
-                    <p>Você deseja realmente apagar o produto?</p>
+                    <p>Você deseja realmente apagar o tag?</p>
                     <table class="table table-hover table-responsive">
                         <thead>
                             <tr class="align-middle">
                                 <th scope="col">#</th>
-                                <th scope="col">Nome</th>
                                 <th scope="col">Tags</th>
                             </tr>
                         </thead>
                         <tbody>
                             <tr>
                                 <th scope="row" class="col-1">{{ $value->id }}</th>
-                                <td class="col-1">{{ $value->name }}</td>
-                                <td class="col-4">{{ $value->tags }}</td>
+                                <td class="col-4">{{ $value->name }}</td>
                             </tr>
                         </tbody>
                     </table>
@@ -37,7 +35,7 @@
                                 d="M2.146 2.146a.5.5 0 0 0 0 .708l11 11a.5.5 0 0 0 .708-.708l-11-11a.5.5 0 0 0-.708 0Z" />
                         </svg>
                     </a>
-                    <a href="/produtos/apagar/id={{ $value->id }}" class="btn btn-danger" data-bs-toggle="tooltip"
+                    <a href="/tags/apagar/id={{ $value->id }}" class="btn btn-danger" data-bs-toggle="tooltip"
                         data-bs-placement="top" title="Apagar">
                         <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="#FFFFFF"
                             class="bi bi-trash3-fill" viewBox="0 0 16 16">
