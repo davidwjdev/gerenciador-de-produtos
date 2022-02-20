@@ -9,16 +9,16 @@
                 </div>
                 <div class="modal-body">
                     <p>Você deseja realmente apagar o produto?</p>
-                    <table class="table table-hover table-responsive">
+                    <table class="table table-hover table-bordered border-secondary rounded-5" aria-label="Produtos">
                         <thead>
-                            <tr class="align-middle">
+                            <tr class="table-danger">
                                 <th scope="col">#</th>
                                 <th scope="col">Nome</th>
                                 <th scope="col">Tags</th>
                             </tr>
                         </thead>
                         <tbody>
-                            <tr>
+                            <tr class="align-middle table-danger">
                                 <th scope="row" class="col-1">{{ $value->id }}</th>
                                 <td class="col-1">{{ $value->name }}</td>
                                 <td class="col-4">{{ $value->tags }}</td>

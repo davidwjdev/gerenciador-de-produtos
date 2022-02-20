@@ -5,9 +5,8 @@
 @endsection
 
 @section('content')
-    <div class="py-1">
-        <a href="/tags/adicionar" class="btn btn-success" data-bs-toggle="tooltip" data-bs-placement="top"
-            title="Adicionar">
+    <div class="py-1 text-end">
+        <a href="/tags/adicionar" class="btn btn-success" data-bs-toggle="tooltip" data-bs-placement="top" title="Adicionar">
             <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="#FFFFFF" class="bi bi-plus-lg"
                 viewBox="0 0 16 16">
                 <path fill-rule="evenodd"
@@ -17,24 +16,25 @@
     </div>
     <div class="py-5">
 
-        <table class="table table-hover table-responsive">
+        <table class="table table-hover table-bordered border-secondary rounded-5" aria-label="Tags">
             <thead>
-                <tr>
+                <tr  class="table-dark">
                     <th scope="col">#</th>
-                    <th scope="col" colspan="2">Tag</th>
+                    <th scope="col">Tag</th>
+                    <th scope="col">Ações</th>
                 </tr>
             </thead>
             <tbody>
                 @if (count($tags) == 0)
                     <tr>
-                        <td colspan="3">Não existem tags cadastrados!</td>
+                        <td colspan="3" class="text-center">Não existem tags cadastrados!</td>
                     </tr>
                 @else
                     @foreach ($tags as $key => $value)
-                        <tr>
+                        <tr class="align-middle">
                             <th scope="row" class="col-1">{{ $value->id }}</th>
-                            <td class="col-9">{{ $value->name }}</td>
-                            <td>
+                            <td class="col-6">{{ $value->name }}</td>
+                            <td class="col-1 text-center">
                                 <a href="/tags/editar/id={{ $value->id }}" class="btn btn-warning"
                                     data-bs-toggle="tooltip" data-bs-placement="top" title="Editar">
                                     <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="#FFFFFF"

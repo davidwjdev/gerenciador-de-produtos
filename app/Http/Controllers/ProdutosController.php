@@ -3,8 +3,9 @@
 namespace App\Http\Controllers;
 
 use App\Models\Produto;
-
+use App\Models\Tag;
 use Illuminate\Http\Request;
+use App\Http\Controllers\Log;
 
 class ProdutosController extends Controller
 {
@@ -26,7 +27,8 @@ class ProdutosController extends Controller
      */
     public function create()
     {
-        return view('produtos.form');
+        $tags = Tag::all();
+        return view('produtos.form', compact('tags'));
     }
 
     /**
@@ -44,8 +46,11 @@ class ProdutosController extends Controller
         $produto = new Produto;
         $produto = Produto::create($body);
         $produto->save();
-
         return redirect('/produtos');
+        // dd($body);
+        // Log::info($body);
+        // var_dump($body);
+        // return "";
     }
 
     /**

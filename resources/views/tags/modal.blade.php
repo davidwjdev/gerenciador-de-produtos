@@ -9,15 +9,15 @@
                 </div>
                 <div class="modal-body">
                     <p>Você deseja realmente apagar o tag?</p>
-                    <table class="table table-hover table-responsive">
+                    <table class="table table-hover table-bordered border-secondary rounded-5" aria-label="Tags">
                         <thead>
-                            <tr class="align-middle">
+                            <tr class="table-danger">
                                 <th scope="col">#</th>
-                                <th scope="col">Tags</th>
+                                <th scope="col">Tag</th>
                             </tr>
                         </thead>
                         <tbody>
-                            <tr>
+                            <tr class="align-middle table-danger">
                                 <th scope="row" class="col-1">{{ $value->id }}</th>
                                 <td class="col-4">{{ $value->name }}</td>
                             </tr>

@@ -24,12 +24,19 @@
                 <input type="text" class="form-control" id="name" name="name" aria-describedby="name"
                     value="{{ isset($produto->id) ? $produto->name : '' }}">
             </div>
-            {{-- <div class="mb-3">
-                <label for="tags" class="form-label">Tags: </label>
-                <input type="text" class="form-control" id="tags" name="tags" aria-describedby="tags"
-                    value="{{ isset($pessoa->id) ? $pessoa->tags : '' }}">
-            </div> --}}
-            <a type="submit" class="btn btn-success"
+
+
+            <div class="mb-3">
+                @foreach ($tags as $key => $value)
+                <input type="checkbox" class="btn-check" id={{ $value->name }} name={{ $value->name }} autocomplete="off">
+                <label class="btn btn-outline-secondary" for={{ $value->name }}>
+                    {{ $value->name }}
+                </label>
+                @endforeach
+            </div>
+
+
+            <button type="submit" class="btn btn-success"
             data-bs-toggle="tooltip" data-bs-placement="top" title="Salvar"
             >
                 <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="#FFFFFF" class="bi bi-check-lg"
@@ -38,7 +45,7 @@
                         d="M12.736 3.97a.733.733 0 0 1 1.047 0c.286.289.29.756.01 1.05L7.88 12.01a.733.733 0 0 1-1.065.02L3.217 8.384a.757.757 0 0 1 0-1.06.733.733 0 0 1 1.047 0l3.052 3.093 5.4-6.425a.247.247 0 0 1 .02-.022Z" />
                 </svg>
 
-            </a>
+            </button>
             <a href="/produtos" class="btn btn-danger" data-bs-toggle="tooltip" data-bs-placement="top" title="Cancelar">
                 <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="#FFFFFF"
                 class="bi bi-x-lg" viewBox="0 0 16 16">
