@@ -50,6 +50,9 @@ Adicionar Produto
           name="tags[]"
           value="{{ $value->id }}"
           autocomplete="off"
+          @foreach ($tagsSelecionados as $key => $valueSelecionado )
+             {{$key->id === $valueSelecionado->$id ? 'checked' : ''}}
+          @endforeach
         />
         <label class="btn btn-outline-success" for="{{ $value->name }}"
           >{{ $value->name }}</label

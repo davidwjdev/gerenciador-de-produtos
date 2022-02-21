@@ -6,6 +6,7 @@ use App\Models\Produto;
 use App\Models\ProdutoTag;
 use App\Models\Tag;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 
 class ProdutosController extends Controller
 {
@@ -16,8 +17,18 @@ class ProdutosController extends Controller
      */
     public function index()
     {
-        $produtos = Produto::all();
-        return view('produtos.index', compact('produtos'));
+        // $produtos = Produto::all();
+        $produtoTag =
+        DB::table('product')
+            ->join('product_tag', 'product.id', '=', 'product_tag.product_id')
+            ->join('tag', 'product_tag.tag_id', '=', 'tag.id')
+            ->select('product.id as idProduct', 'product.name as nameProduct', DB::raw('group_concat(tag.name) as nameTag'))
+            ->groupBy('product.id', 'product.name')
+            ->get();
+
+        return view('produtos.index', compact('produtoTag'));
+
+
     }
 
     /**
@@ -80,7 +91,15 @@ class ProdutosController extends Controller
     public function edit($id)
     {
         $produto = Produto::findOrFail($id);
-        return view('produtos.form', ['produto' => $produto]);
+        $tagsSelecionados =
+        DB::table('product')
+            ->join('product_tag', 'product.id', '=', 'product_tag.product_id')
+            ->join('tag', 'product_tag.tag_id', '=', 'tag.id')
+            ->select('tag.id')
+            ->where('product.id', '=', $id)
+            ->get();
+        $tags = Tag::all();
+        return view('produtos.form', ['produto' => $produto], ['tags' => $tags] ,['tagsSelecionados' => $tagsSelecionados]);
     }
 
     /**

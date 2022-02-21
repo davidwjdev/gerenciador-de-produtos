@@ -42,20 +42,25 @@ Produtos
       </tr>
     </thead>
     <tbody>
-      @if (count($produtos) == 0)
+      @if ($produtoTag === null)
       <tr>
         <td colspan="4" class="text-center">
           Não existem produtos cadastrados!
         </td>
       </tr>
-      @else @foreach ($produtos as $key => $value)
+      @else
+       @foreach ($produtoTag as $key)
       <tr class="align-middle">
-        <th scope="row" class="col-1">{{ $value->id }}</th>
-        <td class="col-1">{{ $value->name }}</td>
-        <td class="col-4">{{ $value->tags }}</td>
+        <th scope="row" class="col-1">{{ $key->idProduct }}</th>
+        <td class="col-1">{{ $key->nameProduct }}</td>
+        <td class="col-4">
+          <div class="d-flex flex-wrap">
+            {{ $key->nameTag }}
+          </div>
+        </td>
         <td class="col-1 text-center">
           <a
-            href="/produtos/editar/id={{ $value->id }}"
+            href="/produtos/editar/id={{ $key->idProduct }}"
             class="btn btn-warning"
             data-bs-toggle="tooltip"
             data-bs-placement="top"
