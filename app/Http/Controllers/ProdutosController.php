@@ -3,9 +3,9 @@
 namespace App\Http\Controllers;
 
 use App\Models\Produto;
+use App\Models\ProdutoTag;
 use App\Models\Tag;
 use Illuminate\Http\Request;
-use App\Http\Controllers\Log;
 
 class ProdutosController extends Controller
 {
@@ -40,17 +40,24 @@ class ProdutosController extends Controller
     public function store(Request $request)
     {
         $request->validate([
-            'name' => 'required',
+            'name' => 'required|unique:product,name'
         ]);
         $body = $request->all();
         $produto = new Produto;
+        var_dump(json_encode($body));
         $produto = Produto::create($body);
         $produto->save();
+
+        $bodyTag = $request->input('tags');
+        $bodyProduto = $produto->id;
+
+        foreach ($bodyTag as $key) {
+            $produtoTag = new ProdutoTag;
+            $produtoTag->tag_id = (int) $key;
+            $produtoTag->product_id = $bodyProduto;
+            $produtoTag->save();
+        }
         return redirect('/produtos');
-        // dd($body);
-        // Log::info($body);
-        // var_dump($body);
-        // return "";
     }
 
     /**
@@ -92,7 +99,17 @@ class ProdutosController extends Controller
         $input = $request->all();
         $produto->fill($input)->save();
 
-        return redirect('/produtos');
+        $bodyTag = $request->input('tags');
+        $bodyProduto = $produto->id;
+
+        foreach ($bodyTag as $key) {
+            $produtoTag = new ProdutoTag;
+            $produtoTag->tag_id = (int) $key;
+            $produtoTag->product_id = $bodyProduto;
+            $produtoTag->save();
+
+            return redirect('/produtos');
+        }
     }
 
     /**
