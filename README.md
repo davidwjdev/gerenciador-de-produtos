@@ -1,64 +1,86 @@
-<p align="center"><a href="https://laravel.com" target="_blank"><img src="https://raw.githubusercontent.com/laravel/art/master/logo-lockup/5%20SVG/2%20CMYK/1%20Full%20Color/laravel-logolockup-cmyk-red.svg" width="400"></a></p>
+# Gerenciador de Produtos
 
-<p align="center">
-<a href="https://travis-ci.org/laravel/framework"><img src="https://travis-ci.org/laravel/framework.svg" alt="Build Status"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/dt/laravel/framework" alt="Total Downloads"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/v/laravel/framework" alt="Latest Stable Version"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/l/laravel/framework" alt="License"></a>
-</p>
+<p>Desenvolvido em Laravel + Bootstrap + MySQL</p>
 
-## About Laravel
+## Guia para inicio:
 
-Laravel is a web application framework with expressive, elegant syntax. We believe development must be an enjoyable and creative experience to be truly fulfilling. Laravel takes the pain out of development by easing common tasks used in many web projects, such as:
+### Clonar diretorio.
 
-- [Simple, fast routing engine](https://laravel.com/docs/routing).
-- [Powerful dependency injection container](https://laravel.com/docs/container).
-- Multiple back-ends for [session](https://laravel.com/docs/session) and [cache](https://laravel.com/docs/cache) storage.
-- Expressive, intuitive [database ORM](https://laravel.com/docs/eloquent).
-- Database agnostic [schema migrations](https://laravel.com/docs/migrations).
-- [Robust background job processing](https://laravel.com/docs/queues).
-- [Real-time event broadcasting](https://laravel.com/docs/broadcasting).
+<p>git clone https://github.com/davidwjdev/gerenciador-de-produtos.git</p>
+<p>cd gerenciador-de-produtos</p>
 
-Laravel is accessible, powerful, and provides tools required for large, robust applications.
+### Instalar composer
+<p>*( necessario ter composer instalado, caso não tenha basta acessar https://getcomposer.org/ e fazer o download e instalar)</p>
+<p>composer install</p>
 
-## Learning Laravel
+### criar o arquivo .env
+<p>->clonar o arquivo da raiz do projeto com nome ".env.example" e renomeie a copia para ".env" </p>
+<p>-> definir configurações do projeto                                                          </p>
+<p>APP_NAME=NomeDoProjeto                                                                       </p>
+<p>APP_ENV=local                                                                                </p>
+<p>APP_KEY=                                                                                     </p>
+<p>APP_DEBUG=true                                                                               </p>
+<p>APP_URL=http://localhost:8080                                                                </p>
 
-Laravel has the most extensive and thorough [documentation](https://laravel.com/docs) and video tutorial library of all modern web application frameworks, making it a breeze to get started with the framework.
+-> definir configurações do banco de dados
+<p>DB_CONNECTION=mysql        </p>
+<p>DB_HOST=db                 </p>
+<p>DB_PORT=3306               </p>
+<p>DB_DATABASE=NomeTabela     </p>
+<p>DB_USERNAME=Usuario        </p>
+<p>DB_PASSWORD=SenhaDoUsuario </p>
 
-If you don't feel like reading, [Laracasts](https://laracasts.com) can help. Laracasts contains over 2000 video tutorials on a range of topics including Laravel, modern PHP, unit testing, and JavaScript. Boost your skills by digging into our comprehensive video library.
+<p>salvar o arquivo com as alterações.</p>
 
-## Laravel Sponsors
+### Alterar porta utilizada pelo banco
 
-We would like to extend our thanks to the following sponsors for funding Laravel development. If you are interested in becoming a sponsor, please visit the Laravel [Patreon page](https://patreon.com/taylorotwell).
+->abrir o arquivo na raiz docker-compose.yml
+<p>    db:                            </p>
+<p>        image: mysql:5.7.22        </p>
+<p>        container_name: gdp-mysql  </p>
+<p>        restart: unless-stopped    </p>
+<p>        tty: true                  </p>
+<p>        ports:                     </p>
+<p>            - "3306:3306"          </p>
+<p>-> alterar para a porta desejada   </p>
+<p>ex: - "3307:3306"                  </p>
 
-### Premium Partners
+### Instalar docker
+<p>*( necessario ter docker instalado, caso não tenha basta acessar https://www.docker.com/ e fazer o download e instalar)</p>
+<p>docker-compose up -d</p>
 
-- **[Vehikl](https://vehikl.com/)**
-- **[Tighten Co.](https://tighten.co)**
-- **[Kirschbaum Development Group](https://kirschbaumdevelopment.com)**
-- **[64 Robots](https://64robots.com)**
-- **[Cubet Techno Labs](https://cubettech.com)**
-- **[Cyber-Duck](https://cyber-duck.co.uk)**
-- **[Many](https://www.many.co.uk)**
-- **[Webdock, Fast VPS Hosting](https://www.webdock.io/en)**
-- **[DevSquad](https://devsquad.com)**
-- **[Curotec](https://www.curotec.com/services/technologies/laravel/)**
-- **[OP.GG](https://op.gg)**
-- **[WebReinvent](https://webreinvent.com/?utm_source=laravel&utm_medium=github&utm_campaign=patreon-sponsors)**
-- **[Lendio](https://lendio.com)**
+### Acessando o projeto
+<p>->Home                                    </p>
+<p>http://localhost/                         </p>
+<p>->Produtos                                </p>
+<p>http://localhost/produtos                 </p>
+<p>->Adiicionar Produtos                     </p>
+<p>http://localhost/produtos/adicionar       </p>
+<p>->Editar Produto                          </p>
+<p>http://localhost/produtos/editar/id={N}   </p>
+<p>->Apagar Produto                          </p>
+<p>http://localhost/produtos/apagar/id={N}   </p>
+<p>->Tags                                    </p>
+<p>http://localhost/tags                     </p>
+<p>->Adicionar Tags                          </p>
+<p>http://localhost/tags/adicionar           </p>
+<p>->Editar Tag                              </p>
+<p>http://localhost/tags/editar/id={N}       </p>
+<p>->Apagar Tag                              </p>
+<p>http://localhost/tags/apagar/id={N}       </p>
+<p>->Relatório de Relevância de Produtos     </p>
+<p>http://localhost/relatorio                </p>
 
-## Contributing
+### Query do Relatório de Relevância de Produtos
 
-Thank you for considering contributing to the Laravel framework! The contribution guide can be found in the [Laravel documentation](https://laravel.com/docs/contributions).
-
-## Code of Conduct
-
-In order to ensure that the Laravel community is welcoming to all, please review and abide by the [Code of Conduct](https://laravel.com/docs/contributions#code-of-conduct).
-
-## Security Vulnerabilities
-
-If you discover a security vulnerability within Laravel, please send an e-mail to Taylor Otwell via [taylor@laravel.com](mailto:taylor@laravel.com). All security vulnerabilities will be promptly addressed.
-
-## License
-
-The Laravel framework is open-sourced software licensed under the [MIT license](https://opensource.org/licenses/MIT).
+<p>SELECT                                                                     </p>
+<p>	TAG.ID AS idTag,                                                          </p>
+<p>	IF(TAG.NAME IS NULL,"Não possui tags atribuídas.",TAG.NAME) AS nameTag ,  </p>
+<p>	COUNT(PRODUCT.ID) AS totalProdutos                                        </p>
+<p>FROM PRODUCT_TAG                                                           </p>
+<p>RIGHT JOIN PRODUCT                                                         </p>
+<p>ON PRODUCT.ID = PRODUCT_TAG.PRODUCT_ID                                     </p>
+<p>LEFT JOIN TAG                                                              </p>
+<p>ON PRODUCT_TAG.TAG_ID = TAG.ID                                             </p>
+<p>GROUP BY TAG.ID, TAG.NAME                                                  </p>
+<p>ORDER BY COUNT(PRODUCT.ID) DESC                                            </p>
